@@ -8,8 +8,10 @@ also changes this theme. Fonts come from Bingie's Font.xml (BoldNN / RegNN).
 
 Based on the Arctic Fuse / Arctic Horizon 2 theme by Goldenfreddy0703. Requires the Bingie skin.
 
-Install: Seren > Tools > Theme Manager > Install Theme > Browse, and pick this zip.
-Auto-update is switched off in meta.json so an upstream update can't overwrite this restyle.
+Install: Seren > Tools > Theme Manager > Install Theme, then either browse to a downloaded zip or enter
+`https://github.com/Howarddj/seren.theme.bingie/zipball/main/`
+Updates come from this repo: Seren compares the installed version with `resources/skins/meta.json` on `main`,
+so bump `version` there when you push a change.
 
 ## Media flags
 

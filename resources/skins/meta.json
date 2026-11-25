@@ -1,7 +1,7 @@
 {
   "skin_name": "Bingie",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "a4k / Bingie restyle",
-  "update_directory": "",
-  "remote_meta": ""
+  "update_directory": "https://github.com/Howarddj/seren.theme.bingie/zipball/main/",
+  "remote_meta": "https://raw.githubusercontent.com/Howarddj/seren.theme.bingie/main/resources/skins/meta.json"
 }
