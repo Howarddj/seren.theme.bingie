@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Seren theme for Bingie -->
+<window type="dialog">
+    <defaultcontrol>2</defaultcontrol>
+    <coordinates>
+        <left>0</left>
+        <top>0</top>
+    </coordinates>
+    <animation type="WindowOpen" reversible="false">
+        <effect type="fade" start="0" end="100" time="300"/>
+    </animation>
+    <animation type="WindowClose" reversible="false">
+        <effect type="fade" start="100" end="0" time="250"/>
+    </animation>
+    <controls>
+        <!-- Background -->
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>FF000000</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window().Property(item.art.fanart)]</texture>
+            <animation effect="fade" start="0" end="100" time="600">WindowOpen</animation>
+        </control>
+        <!-- MultiFanart (script.artwork.helper) -->
+        <control type="group">
+            <visible>Skin.HasSetting(SkinHelper.EnableExtraFanart) + System.HasAddon(script.artwork.helper)</visible>
+            <control type="fadelabel" id="1010">
+                <info>Window().Property(item.art.fanart)</info>
+                <info>Window().Property(item.art.fanart1)</info>
+                <info>Window().Property(item.art.fanart2)</info>
+                <info>Window().Property(item.art.fanart3)</info>
+                <info>Window().Property(item.art.fanart4)</info>
+                <info>Window().Property(item.art.fanart5)</info>
+                <info>Window().Property(item.art.fanart6)</info>
+                <info>Window().Property(item.art.fanart7)</info>
+                <info>Window().Property(item.art.fanart8)</info>
+                <info>Window().Property(item.art.fanart9)</info>
+                <info>Window().Property(item.art.fanart10)</info>
+                <info>Window().Property(item.art.fanart11)</info>
+                <info>Window().Property(item.art.fanart12)</info>
+                <info>Window().Property(item.art.fanart13)</info>
+                <info>Window().Property(item.art.fanart14)</info>
+                <info>Window().Property(item.art.fanart15)</info>
+                <info>Window().Property(item.art.fanart16)</info>
+                <info>Window().Property(item.art.fanart17)</info>
+                <info>Window().Property(item.art.fanart18)</info>
+                <info>Window().Property(item.art.fanart19)</info>
+                <info>Window().Property(item.art.fanart20)</info>
+                <randomize>true</randomize>
+                <pauseatend>8000</pauseatend>
+                <scroll>false</scroll>
+                <scrollout>false</scrollout>
+                <resetonlabelchange>true</resetonlabelchange>
+                <textcolor>00000000</textcolor>
+            </control>
+            <control type="multiimage">
+                <imagepath background="true">$INFO[Control.GetLabel(1010)]</imagepath>
+                <timeperimage>4000</timeperimage>
+                <fadetime>1000</fadetime>
+                <pauseatend>12000</pauseatend>
+                <randomize>true</randomize>
+                <loop>no</loop>
+            </control>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>66000000</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1400</width>
+            <height>1080</height>
+            <texture>bingie_gradient_left.png</texture>
+        </control>
+        <control type="image">
+            <top>480</top>
+            <width>1920</width>
+            <height>600</height>
+            <texture>bingie_gradient_bottom.png</texture>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>220</height>
+            <texture>bingie_gradient_top.png</texture>
+            <colordiffuse>99FFFFFF</colordiffuse>
+        </control>
+        <control type="list" id="1100">
+        </control>
+        <!-- Title block -->
+        <control type="group">
+            <left>110</left>
+            <top>110</top>
+            <control type="image" id="1001">
+                <width>700</width>
+                <height>260</height>
+                <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                <texture background="true">$INFO[Window().Property(item.art.clearlogo)]</texture>
+            </control>
+            <control type="textbox">
+                <top>90</top>
+                <width>820</width>
+                <height>170</height>
+                <font>Bold64</font>
+                <aligny>bottom</aligny>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <shadowcolor>80000000</shadowcolor>
+                <label>$INFO[Window().Property(item.info.tvshowtitle)]</label>
+                <visible>String.IsEmpty(Window().Property(item.art.clearlogo)) + !String.IsEmpty(Window().Property(item.info.tvshowtitle))</visible>
+            </control>
+            <control type="textbox">
+                <top>90</top>
+                <width>820</width>
+                <height>170</height>
+                <font>Bold64</font>
+                <aligny>bottom</aligny>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <shadowcolor>80000000</shadowcolor>
+                <label>$INFO[Window().Property(item.info.title)]</label>
+                <visible>String.IsEmpty(Window().Property(item.art.clearlogo)) + String.IsEmpty(Window().Property(item.info.tvshowtitle))</visible>
+            </control>
+        </control>
+        <control type="grouplist">
+            <left>110</left>
+            <top>400</top>
+            <width>820</width>
+            <height>40</height>
+            <orientation>horizontal</orientation>
+            <itemgap>22</itemgap>
+            <usecontrolcoords>true</usecontrolcoords>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Bold28</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.season),S,:]$INFO[Window().Property(item.info.episode),E,]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.title),“,”]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.title))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Bold28</font>
+                <textcolor>$INFO[Skin.String(BingieRatingInDetailsColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.rating)]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.rating))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.year)]</label>
+                <visible>String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.year))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.aired)]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.aired))</visible>
+            </control>
+        </control>
+        <control type="textbox">
+            <left>110</left>
+            <top>458</top>
+            <width>820</width>
+            <height>160</height>
+            <font>Reg28</font>
+            <textcolor>$INFO[Skin.String(BingiePlotTextColor)]</textcolor>
+            <shadowcolor>80000000</shadowcolor>
+            <label>$INFO[Window().Property(item.info.plot)]</label>
+        </control>
+        <!-- Seren logo -->
+        <control type="image" id="1001">
+            <right>70</right>
+            <top>50</top>
+            <width>200</width>
+            <height>90</height>
+            <aspectratio align="right">keep</aspectratio>
+            <texture>$INFO[Window().Property(seren.logo)]</texture>
+            <colordiffuse>CCFFFFFF</colordiffuse>
+        </control>
+
+        <!-- Status (before scraping starts) -->
+        <control type="group">
+            <left>110</left>
+            <top>720</top>
+            <visible>String.IsEqual(Window().Property(process_started),false)</visible>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>56</width>
+                <height>56</height>
+                <texture>bingie_spinner.png</texture>
+                <colordiffuse>$INFO[Skin.String(SpinnerTextureColor)]</colordiffuse>
+                <animation effect="rotate" end="-360" center="auto" time="900" loop="true" reversible="false" condition="true">Conditional</animation>
+            </control>
+            <control type="label">
+                <left>80</left>
+                <width>1200</width>
+                <height>56</height>
+                <aligny>center</aligny>
+                <font>Bold32</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(notification_text)]</label>
+            </control>
+        </control>
+
+        <!-- Scraping progress -->
+        <control type="group">
+            <left>110</left>
+            <top>720</top>
+            <visible>String.IsEqual(Window().Property(process_started),true)</visible>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>56</width>
+                <height>56</height>
+                <texture>bingie_spinner.png</texture>
+                <colordiffuse>$INFO[Skin.String(SpinnerTextureColor)]</colordiffuse>
+                <animation effect="rotate" end="-360" center="auto" time="900" loop="true" reversible="false" condition="true">Conditional</animation>
+            </control>
+            <control type="label">
+                <left>80</left>
+                <width>900</width>
+                <height>56</height>
+                <aligny>center</aligny>
+                <font>Bold32</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>Searching for sources</label>
+            </control>
+            <control type="label">
+                <left>0</left>
+                <top>0</top>
+                <width>760</width>
+                <height>56</height>
+                <align>right</align>
+                <aligny>center</aligny>
+                <font>Bold32</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(progress),,%]</label>
+            </control>
+            <control type="image">
+                <left>0</left>
+                <top>80</top>
+                <width>760</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>33FFFFFF</colordiffuse>
+            </control>
+            <control type="image">
+                <left>0</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),5)</visible>
+            </control>
+            <control type="image">
+                <left>38</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),10)</visible>
+            </control>
+            <control type="image">
+                <left>76</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),15)</visible>
+            </control>
+            <control type="image">
+                <left>114</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),20)</visible>
+            </control>
+            <control type="image">
+                <left>152</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),25)</visible>
+            </control>
+            <control type="image">
+                <left>190</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),30)</visible>
+            </control>
+            <control type="image">
+                <left>228</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),35)</visible>
+            </control>
+            <control type="image">
+                <left>266</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),40)</visible>
+            </control>
+            <control type="image">
+                <left>304</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),45)</visible>
+            </control>
+            <control type="image">
+                <left>342</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),50)</visible>
+            </control>
+            <control type="image">
+                <left>380</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),55)</visible>
+            </control>
+            <control type="image">
+                <left>418</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),60)</visible>
+            </control>
+            <control type="image">
+                <left>456</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),65)</visible>
+            </control>
+            <control type="image">
+                <left>494</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),70)</visible>
+            </control>
+            <control type="image">
+                <left>532</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),75)</visible>
+            </control>
+            <control type="image">
+                <left>570</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),80)</visible>
+            </control>
+            <control type="image">
+                <left>608</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),85)</visible>
+            </control>
+            <control type="image">
+                <left>646</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),90)</visible>
+            </control>
+            <control type="image">
+                <left>684</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),95)</visible>
+            </control>
+            <control type="image">
+                <left>722</left>
+                <top>80</top>
+                <width>38</width>
+                <height>6</height>
+                <texture>bingie_white.png</texture>
+                <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(progress),100)</visible>
+            </control>
+            <control type="grouplist">
+                <left>0</left>
+                <top>115</top>
+                <width>1300</width>
+                <height>40</height>
+                <orientation>horizontal</orientation>
+                <itemgap>40</itemgap>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Total  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(totals_total)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Torrents  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(torrents_total)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Cached  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(torrentsCached_total)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Hosters  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(hosters_total)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Cloud  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(cloudFiles_total)][/B][/COLOR]</label>
+                </control>
+            </control>
+            <control type="grouplist">
+                <left>0</left>
+                <top>160</top>
+                <width>1300</width>
+                <height>40</height>
+                <orientation>horizontal</orientation>
+                <itemgap>40</itemgap>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>4K  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(totals_4K)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>1080p  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(totals_1080p)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>720p  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(totals_720p)][/B][/COLOR]</label>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>SD  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(totals_SD)][/B][/COLOR]</label>
+                </control>
+            </control>
+            <control type="label">
+                <top>210</top>
+                <width>1300</width>
+                <height>40</height>
+                <font>Reg24</font>
+                <textcolor>$INFO[Skin.String(BingieSecondaryTextColor)]</textcolor>
+                <label>Remaining providers  [COLOR $INFO[Skin.String(BingieDeatailsTextColor)]]$INFO[Window().Property(remaining_providers_count)][/COLOR]</label>
+                <visible>Integer.IsGreaterOrEqual(Window().Property(remaining_providers_count),10)</visible>
+            </control>
+            <control type="label">
+                <top>210</top>
+                <width>1300</width>
+                <height>40</height>
+                <font>Reg24</font>
+                <textcolor>$INFO[Skin.String(BingieSecondaryTextColor)]</textcolor>
+                <scroll>true</scroll>
+                <label>$INFO[Window().Property(remaining_providers_list)]</label>
+                <visible>!Integer.IsGreaterOrEqual(Window().Property(remaining_providers_count),10)</visible>
+            </control>
+        </control>
+
+        <control type="list" id="2000">
+            <visible>false</visible>
+        </control>
+    </controls>
+</window>

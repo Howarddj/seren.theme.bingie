@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Seren theme for Bingie -->
+<window type="dialog">
+    <defaultcontrol>2000</defaultcontrol>
+    <coordinates>
+        <left>0</left>
+        <top>0</top>
+    </coordinates>
+    <animation type="WindowOpen" reversible="false">
+        <effect type="fade" start="0" end="100" time="300"/>
+    </animation>
+    <animation type="WindowClose" reversible="false">
+        <effect type="fade" start="100" end="0" time="250"/>
+    </animation>
+    <controls>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>FF000000</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window().Property(seren.fanart)]</texture>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>$INFO[Skin.String(BackgroundOverlayColor)]</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>BF000000</colordiffuse>
+        </control>
+        <control type="label">
+            <left>80</left>
+            <top>40</top>
+            <width>1760</width>
+            <height>70</height>
+            <align>left</align>
+            <aligny>center</aligny>
+            <font>Bold38</font>
+            <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+            <label>[COLOR $INFO[Skin.String(BingieProgressBarColor)]]SEREN[/COLOR]   $INFO[Window().Property(package.name)]</label>
+        </control>
+        <control type="scrollbar" id="1111">
+            <left>50</left>
+            <top>140</top>
+            <width>8</width>
+            <height>900</height>
+            <texturesliderbackground border="3" colordiffuse="$INFO[Skin.String(ScrollbarBackgroundColor)]">bingie_bar.png</texturesliderbackground>
+            <texturesliderbar border="3" colordiffuse="$INFO[Skin.String(ScrollbarUnfocusedColor)]">bingie_bar.png</texturesliderbar>
+            <texturesliderbarfocus border="3" colordiffuse="$INFO[Skin.String(ScrollbarFocusedColor)]">bingie_bar.png</texturesliderbarfocus>
+            <textureslidernib></textureslidernib>
+            <textureslidernibfocus></textureslidernibfocus>
+            <pulseonselect>false</pulseonselect>
+            <orientation>vertical</orientation>
+            <showonepage>false</showonepage>
+            <onright>2000</onright>
+        </control>
+
+        <!-- Providers -->
+        <control type="list" id="2000">
+            <viewtype label="Providers">list</viewtype>
+            <left>80</left>
+            <top>140</top>
+            <width>1240</width>
+            <height>900</height>
+            <orientation>vertical</orientation>
+            <pagecontrol>1111</pagecontrol>
+            <onleft>1111</onleft>
+            <onright condition="String.IsEqual(Window().Property(hassettings),true)">1000</onright>
+            <onright condition="!String.IsEqual(Window().Property(hassettings),true)">3000</onright>
+            <scrolltime tween="cubic" easing="out">300</scrolltime>
+            <itemlayout height="120" width="1240" condition="!String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>1240</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonColor)]</colordiffuse>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>1090</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(BingieRatingInDetailsColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(BingieProgressBarColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </itemlayout>
+            <itemlayout height="120" width="600" condition="String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>600</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonColor)]</colordiffuse>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>450</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(BingieRatingInDetailsColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(BingieProgressBarColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </itemlayout>
+            <focusedlayout height="120" width="1240" condition="Control.HasFocus(2000) + !String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>1240</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>1090</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </focusedlayout>
+            <focusedlayout height="120" width="1240" condition="!Control.HasFocus(2000) + !String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>1240</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                        <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>1090</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>830</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </focusedlayout>
+            <focusedlayout height="120" width="600" condition="Control.HasFocus(2000) + String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>600</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>450</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </focusedlayout>
+            <focusedlayout height="120" width="600" condition="!Control.HasFocus(2000) + String.IsEqual(Window().Property(hassettings),true)">
+                    <control type="image">
+                        <width>600</width>
+                        <height>108</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                        <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[Window().Property(seren.logo)]</texture>
+                        <visible>String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="image">
+                        <left>20</left>
+                        <top>14</top>
+                        <width>80</width>
+                        <height>80</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture>$INFO[ListItem.Property(provider.icon)]</texture>
+                        <visible>!String.IsEmpty(ListItem.Property(provider.icon))</visible>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>12</top>
+                        <width>450</width>
+                        <height>42</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Bold28</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+                    </control>
+                    <control type="label">
+                        <left>125</left>
+                        <top>58</top>
+                        <width>260</width>
+                        <height>34</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30622]  [CAPITALIZE]$INFO[ListItem.Property(provider_type)][/CAPITALIZE]</label>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+                    <control type="label">
+                        <left>385</left>
+                        <top>58</top>
+                        <width>190</width>
+                        <height>34</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$ADDON[plugin.video.seren 30568]  [COLOR $INFO[Skin.String(ButtonFocusTextColor)]][B]$INFO[ListItem.Property(status)][/B][/COLOR]</label>
+                        <visible>!String.IsEqual(ListItem.Property(status),Enabled)</visible>
+                    </control>
+            </focusedlayout>
+        </control>
+
+        <!-- Package settings -->
+        <control type="group">
+            <left>720</left>
+            <top>140</top>
+            <visible>String.IsEqual(Window().Property(hassettings),true)</visible>
+            <animation effect="fade" time="250">Visible</animation>
+            <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>640</width>
+            <height>900</height>
+            <texture border="12">bingie_panel.png</texture>
+            <colordiffuse>$INFO[Skin.String(GeneralPanelsColor)]</colordiffuse>
+        </control>
+            <control type="list" id="1000">
+                <viewtype label="Settings">list</viewtype>
+                <left>20</left>
+                <top>20</top>
+                <width>600</width>
+                <height>860</height>
+                <orientation>vertical</orientation>
+                <onleft>2000</onleft>
+                <onright>3000</onright>
+                <scrolltime tween="cubic" easing="out">200</scrolltime>
+            <itemlayout height="72" width="600">
+                    <control type="image">
+                        <width>600</width>
+                        <height>64</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonColor)]</colordiffuse>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]</label>
+                        <visible>!String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]…</label>
+                        <visible>String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>330</left>
+                        <top>0</top>
+                        <width>246</width>
+                        <height>64</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Property(value)]</label>
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + !String.IsEqual(ListItem.Property(type),bool)</visible>
+                    </control>
+                    <control type="group">
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + String.IsEqual(ListItem.Property(type),bool)</visible>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>4DFFFFFF</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>548</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>520</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    </control>
+            </itemlayout>
+            <focusedlayout height="72" width="600" condition="Control.HasFocus(1000)">
+                    <control type="image">
+                        <width>600</width>
+                        <height>64</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]</label>
+                        <visible>!String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]…</label>
+                        <visible>String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>330</left>
+                        <top>0</top>
+                        <width>246</width>
+                        <height>64</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>true</scroll>
+                        <label>$INFO[ListItem.Property(value)]</label>
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + !String.IsEqual(ListItem.Property(type),bool)</visible>
+                    </control>
+                    <control type="group">
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + String.IsEqual(ListItem.Property(type),bool)</visible>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusTextColor)]</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>66000000</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>548</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>520</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    </control>
+            </focusedlayout>
+            <focusedlayout height="72" width="600" condition="!Control.HasFocus(1000)">
+                    <control type="image">
+                        <width>600</width>
+                        <height>64</height>
+                        <texture border="12">bingie_panel.png</texture>
+                        <colordiffuse>$INFO[Skin.String(ButtonFocusColor)]</colordiffuse>
+                        <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]</label>
+                        <visible>!String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>24</left>
+                        <top>0</top>
+                        <width>340</width>
+                        <height>64</height>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg26</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Label]…</label>
+                        <visible>String.IsEqual(ListItem.Property(has_action),True)</visible>
+                    </control>
+                    <control type="label">
+                        <left>330</left>
+                        <top>0</top>
+                        <width>246</width>
+                        <height>64</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(ButtonFocusTextColor)]</textcolor>
+                        <scroll>false</scroll>
+                        <label>$INFO[ListItem.Property(value)]</label>
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + !String.IsEqual(ListItem.Property(type),bool)</visible>
+                    </control>
+                    <control type="group">
+                        <visible>!String.IsEqual(ListItem.Property(hide_value),True) + String.IsEqual(ListItem.Property(type),bool)</visible>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>$INFO[Skin.String(BingieProgressBarColor)]</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>516</left>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>32</height>
+                        <texture>bingie_toggle_track.png</texture>
+                        <colordiffuse>4DFFFFFF</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>548</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    <control type="image">
+                        <left>520</left>
+                        <top>20</top>
+                        <width>24</width>
+                        <height>24</height>
+                        <texture>bingie_knob.png</texture>
+                        <colordiffuse>FFFFFFFF</colordiffuse>
+                        <visible>!String.IsEqual(ListItem.Property(value),True)</visible>
+                    </control>
+                    </control>
+            </focusedlayout>
+            </control>
+        </control>
+        <control type="group">
+            <left>1380</left>
+            <top>140</top>
+            <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>460</width>
+            <height>900</height>
+            <texture border="12">bingie_panel.png</texture>
+            <colordiffuse>$INFO[Skin.String(GeneralPanelsColor)]</colordiffuse>
+        </control>
+            <control type="grouplist" id="3000">
+                <left>20</left>
+                <top>20</top>
+                <width>420</width>
+                <height>860</height>
+                <itemgap>8</itemgap>
+                <onleft condition="String.IsEqual(Window().Property(hassettings),true)">1000</onleft>
+                <onleft condition="!String.IsEqual(Window().Property(hassettings),true)">2000</onleft>
+                    <control type="button" id="3001">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30242]</label>
+                    </control>
+                    <control type="button" id="3002">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30243]</label>
+                    </control>
+                    <control type="button" id="3003">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30244]</label>
+                    </control>
+                    <control type="button" id="3004">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30245]</label>
+                    </control>
+                    <control type="button" id="3005">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30246]</label>
+                    </control>
+                    <control type="button" id="3006">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30247]</label>
+                    </control>
+                    <control type="image">
+                        <width>420</width>
+                        <height>17</height>
+                        <texture border="0,8,0,8">bingie_separator.png</texture>
+                        <colordiffuse>26FFFFFF</colordiffuse>
+                    </control>
+                    <control type="button" id="2999">
+                        <width>420</width>
+                        <height>64</height>
+                        <font>Reg26</font>
+                        <textoffsetx>26</textoffsetx>
+                        <aligny>center</aligny>
+                        <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                        <focusedcolor>$INFO[Skin.String(ButtonFocusTextColor)]</focusedcolor>
+                        <texturefocus border="12" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">bingie_panel.png</texturefocus>
+                        <texturenofocus></texturenofocus>
+                        <pulseonselect>false</pulseonselect>
+                        <label>$ADDON[plugin.video.seren 30623]</label>
+                    </control>
+            </control>
+        </control>
+    </controls>
+</window>

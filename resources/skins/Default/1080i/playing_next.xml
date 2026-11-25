@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Seren theme for Bingie -->
+<window>
+    <defaultcontrol always="true">3001</defaultcontrol>
+    <onload>Dialog.Close(fullscreeninfo,true)</onload>
+    <onload>Dialog.Close(videoosd,true)</onload>
+    <onload>Dialog.Close(seekbar,true)</onload>
+    <animation type="WindowOpen" reversible="false">
+        <effect type="slide" start="0,400" end="0,0" tween="cubic" easing="out" time="450"/>
+        <effect type="fade" start="0" end="100" time="350"/>
+    </animation>
+    <animation type="WindowClose" reversible="false">
+        <effect type="slide" start="0,0" end="0,400" tween="cubic" easing="in" time="400"/>
+        <effect type="fade" start="100" end="0" time="300"/>
+    </animation>
+    <controls>
+        <control type="image">
+            <top>380</top>
+            <width>1920</width>
+            <height>700</height>
+            <texture>bingie_gradient_bottom.png</texture>
+        </control>
+        <!-- Up next card -->
+        <control type="group">
+            <right>70</right>
+            <bottom>150</bottom>
+            <width>560</width>
+            <height>520</height>
+            <control type="label">
+                <width>560</width>
+                <height>44</height>
+                <aligny>center</aligny>
+                <font>Bold30</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <shadowcolor>80000000</shadowcolor>
+                <label>$ADDON[plugin.video.seren 30553] [COLOR $INFO[Skin.String(BingieProgressBarColor)]]$INFO[Player.TimeRemaining(ss)][/COLOR] $ADDON[plugin.video.seren 30554]</label>
+            </control>
+            <control type="group">
+                <top>54</top>
+                <control type="image">
+                    <width>560</width>
+                    <height>315</height>
+                    <texture border="12">bingie_panel.png</texture>
+                    <colordiffuse>$INFO[Skin.String(ButtonColor)]</colordiffuse>
+                </control>
+                <control type="image">
+                    <left>3</left>
+                    <top>3</top>
+                    <width>554</width>
+                    <height>309</height>
+                    <aspectratio>scale</aspectratio>
+                    <texture background="true">$INFO[Window().Property(item.art.fanart)]</texture>
+                    <visible>String.IsEmpty(Window().Property(item.art.landscape)) + String.IsEmpty(Window().Property(item.art.thumb))</visible>
+                </control>
+                <control type="image">
+                    <left>3</left>
+                    <top>3</top>
+                    <width>554</width>
+                    <height>309</height>
+                    <aspectratio>scale</aspectratio>
+                    <texture background="true">$INFO[Window().Property(item.art.thumb)]</texture>
+                    <visible>String.IsEmpty(Window().Property(item.art.landscape)) + !String.IsEmpty(Window().Property(item.art.thumb))</visible>
+                </control>
+                <control type="image">
+                    <left>3</left>
+                    <top>3</top>
+                    <width>554</width>
+                    <height>309</height>
+                    <aspectratio>scale</aspectratio>
+                    <texture background="true">$INFO[Window().Property(item.art.landscape)]</texture>
+                    <visible>!String.IsEmpty(Window().Property(item.art.landscape))</visible>
+                </control>
+                <control type="image">
+                    <left>3</left>
+                    <top>172</top>
+                    <width>554</width>
+                    <height>140</height>
+                    <texture>bingie_gradient_bottom.png</texture>
+                </control>
+                <control type="label">
+                    <left>22</left>
+                    <top>261</top>
+                    <width>516</width>
+                    <height>36</height>
+                    <font>Bold26</font>
+                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    <label>$INFO[Window().Property(item.info.season),S,:]$INFO[Window().Property(item.info.episode),E,]</label>
+                </control>
+                <control type="progress" id="3014">
+                    <left>3</left>
+                    <top>306</top>
+                    <width>554</width>
+                    <height>6</height>
+                    <texturebg colordiffuse="40FFFFFF">bingie_white.png</texturebg>
+                    <lefttexture></lefttexture>
+                    <midtexture colordiffuse="$INFO[Skin.String(BingieProgressBarColor)]">bingie_white.png</midtexture>
+                    <righttexture></righttexture>
+                </control>
+            </control>
+            <control type="label">
+                <top>383</top>
+                <width>560</width>
+                <height>42</height>
+                <font>Bold32</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.tvshowtitle)]</label>
+            </control>
+            <control type="label">
+                <top>425</top>
+                <width>560</width>
+                <height>34</height>
+                <font>Reg26</font>
+                <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.title)][COLOR $INFO[Skin.String(BingieRatingInDetailsColor)]][B]$INFO[Window().Property(item.info.rating),     ,][/B][/COLOR]</label>
+            </control>
+        </control>
+        <!-- buttons -->
+        <control type="grouplist">
+            <right>70</right>
+            <bottom>60</bottom>
+            <width>1700</width>
+            <height>64</height>
+            <orientation>horizontal</orientation>
+            <align>right</align>
+            <itemgap>14</itemgap>
+                <control type="radiobutton" id="3001">
+                    <width>240</width>
+                    <height>64</height>
+                    <font>Reg28</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>72</textoffsetx>
+                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    <focusedcolor>$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]</focusedcolor>
+                    <label>$ADDON[plugin.video.seren 30555]</label>
+                    <texturefocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderFocusColor)]">bingie_button.png</texturefocus>
+                    <texturenofocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderUnfocusColor)]">bingie_button.png</texturenofocus>
+                    <textureradioonfocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_play.png</textureradioonfocus>
+                    <textureradioofffocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_play.png</textureradioofffocus>
+                    <textureradioonnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_play.png</textureradioonnofocus>
+                    <textureradiooffnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_play.png</textureradiooffnofocus>
+                    <radioposx>28</radioposx>
+                    <radioposy>20</radioposy>
+                    <radiowidth>24</radiowidth>
+                    <radioheight>24</radioheight>
+                    <pulseonselect>false</pulseonselect>
+                </control>
+                <control type="radiobutton" id="3002">
+                    <width>180</width>
+                    <height>64</height>
+                    <font>Reg28</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>72</textoffsetx>
+                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    <focusedcolor>$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]</focusedcolor>
+                    <label>$ADDON[plugin.video.seren 30459]</label>
+                    <texturefocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderFocusColor)]">bingie_button.png</texturefocus>
+                    <texturenofocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderUnfocusColor)]">bingie_button.png</texturenofocus>
+                    <textureradioonfocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_close.png</textureradioonfocus>
+                    <textureradioofffocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_close.png</textureradioofffocus>
+                    <textureradioonnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_close.png</textureradioonnofocus>
+                    <textureradiooffnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_close.png</textureradiooffnofocus>
+                    <radioposx>28</radioposx>
+                    <radioposy>20</radioposy>
+                    <radiowidth>24</radiowidth>
+                    <radioheight>24</radioheight>
+                    <pulseonselect>false</pulseonselect>
+                </control>
+                <control type="radiobutton" id="3003">
+                    <width>200</width>
+                    <height>64</height>
+                    <font>Reg28</font>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <textoffsetx>72</textoffsetx>
+                    <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                    <focusedcolor>$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]</focusedcolor>
+                    <label>$ADDON[plugin.video.seren 30070]</label>
+                    <texturefocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderFocusColor)]">bingie_button.png</texturefocus>
+                    <texturenofocus border="8" colordiffuse="$INFO[Skin.String(ViewDetailsBorderUnfocusColor)]">bingie_button.png</texturenofocus>
+                    <textureradioonfocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_cancel.png</textureradioonfocus>
+                    <textureradioofffocus colordiffuse="$INFO[Skin.String(BingieSecondaryButtonFocusTextColor)]">bingie_icon_cancel.png</textureradioofffocus>
+                    <textureradioonnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_cancel.png</textureradioonnofocus>
+                    <textureradiooffnofocus colordiffuse="$INFO[Skin.String(GeneralTextColor)]">bingie_icon_cancel.png</textureradiooffnofocus>
+                    <radioposx>28</radioposx>
+                    <radioposy>20</radioposy>
+                    <radiowidth>24</radiowidth>
+                    <radioheight>24</radioheight>
+                    <pulseonselect>false</pulseonselect>
+                </control>
+        </control>
+    </controls>
+</window>

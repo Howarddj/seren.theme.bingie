@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Seren theme for Bingie -->
+<window type="dialog">
+    <onload>Skin.SetString(serenfile,$INFO[Window().Property(release_title)])</onload>
+    <defaultcontrol>2</defaultcontrol>
+    <coordinates>
+        <left>0</left>
+        <top>0</top>
+    </coordinates>
+    <animation type="WindowOpen" reversible="false">
+        <effect type="fade" start="0" end="100" time="300"/>
+    </animation>
+    <animation type="WindowClose" reversible="false">
+        <effect type="fade" start="100" end="0" time="250"/>
+    </animation>
+    <controls>
+        <!-- Background -->
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>FF000000</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window().Property(item.art.fanart)]</texture>
+            <animation effect="fade" start="0" end="100" time="600">WindowOpen</animation>
+        </control>
+        <!-- MultiFanart (script.artwork.helper) -->
+        <control type="group">
+            <visible>Skin.HasSetting(SkinHelper.EnableExtraFanart) + System.HasAddon(script.artwork.helper)</visible>
+            <control type="fadelabel" id="1010">
+                <info>Window().Property(item.art.fanart)</info>
+                <info>Window().Property(item.art.fanart1)</info>
+                <info>Window().Property(item.art.fanart2)</info>
+                <info>Window().Property(item.art.fanart3)</info>
+                <info>Window().Property(item.art.fanart4)</info>
+                <info>Window().Property(item.art.fanart5)</info>
+                <info>Window().Property(item.art.fanart6)</info>
+                <info>Window().Property(item.art.fanart7)</info>
+                <info>Window().Property(item.art.fanart8)</info>
+                <info>Window().Property(item.art.fanart9)</info>
+                <info>Window().Property(item.art.fanart10)</info>
+                <info>Window().Property(item.art.fanart11)</info>
+                <info>Window().Property(item.art.fanart12)</info>
+                <info>Window().Property(item.art.fanart13)</info>
+                <info>Window().Property(item.art.fanart14)</info>
+                <info>Window().Property(item.art.fanart15)</info>
+                <info>Window().Property(item.art.fanart16)</info>
+                <info>Window().Property(item.art.fanart17)</info>
+                <info>Window().Property(item.art.fanart18)</info>
+                <info>Window().Property(item.art.fanart19)</info>
+                <info>Window().Property(item.art.fanart20)</info>
+                <randomize>true</randomize>
+                <pauseatend>8000</pauseatend>
+                <scroll>false</scroll>
+                <scrollout>false</scrollout>
+                <resetonlabelchange>true</resetonlabelchange>
+                <textcolor>00000000</textcolor>
+            </control>
+            <control type="multiimage">
+                <imagepath background="true">$INFO[Control.GetLabel(1010)]</imagepath>
+                <timeperimage>4000</timeperimage>
+                <fadetime>1000</fadetime>
+                <pauseatend>12000</pauseatend>
+                <randomize>true</randomize>
+                <loop>no</loop>
+            </control>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>1080</height>
+            <texture>bingie_white.png</texture>
+            <colordiffuse>66000000</colordiffuse>
+        </control>
+        <control type="image">
+            <width>1400</width>
+            <height>1080</height>
+            <texture>bingie_gradient_left.png</texture>
+        </control>
+        <control type="image">
+            <top>480</top>
+            <width>1920</width>
+            <height>600</height>
+            <texture>bingie_gradient_bottom.png</texture>
+        </control>
+        <control type="image">
+            <width>1920</width>
+            <height>220</height>
+            <texture>bingie_gradient_top.png</texture>
+            <colordiffuse>99FFFFFF</colordiffuse>
+        </control>
+        <control type="list" id="1100">
+        </control>
+        <!-- Title block -->
+        <control type="group">
+            <left>110</left>
+            <top>110</top>
+            <control type="image" id="1001">
+                <width>700</width>
+                <height>260</height>
+                <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                <texture background="true">$INFO[Window().Property(item.art.clearlogo)]</texture>
+            </control>
+            <control type="textbox">
+                <top>90</top>
+                <width>820</width>
+                <height>170</height>
+                <font>Bold64</font>
+                <aligny>bottom</aligny>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <shadowcolor>80000000</shadowcolor>
+                <label>$INFO[Window().Property(item.info.tvshowtitle)]</label>
+                <visible>String.IsEmpty(Window().Property(item.art.clearlogo)) + !String.IsEmpty(Window().Property(item.info.tvshowtitle))</visible>
+            </control>
+            <control type="textbox">
+                <top>90</top>
+                <width>820</width>
+                <height>170</height>
+                <font>Bold64</font>
+                <aligny>bottom</aligny>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <shadowcolor>80000000</shadowcolor>
+                <label>$INFO[Window().Property(item.info.title)]</label>
+                <visible>String.IsEmpty(Window().Property(item.art.clearlogo)) + String.IsEmpty(Window().Property(item.info.tvshowtitle))</visible>
+            </control>
+        </control>
+        <control type="grouplist">
+            <left>110</left>
+            <top>400</top>
+            <width>820</width>
+            <height>40</height>
+            <orientation>horizontal</orientation>
+            <itemgap>22</itemgap>
+            <usecontrolcoords>true</usecontrolcoords>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Bold28</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.season),S,:]$INFO[Window().Property(item.info.episode),E,]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.title),“,”]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.title))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Bold28</font>
+                <textcolor>$INFO[Skin.String(BingieRatingInDetailsColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.rating)]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.rating))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.year)]</label>
+                <visible>String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.year))</visible>
+            </control>
+            <control type="label">
+                <width>auto</width>
+                <height>40</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                <label>$INFO[Window().Property(item.info.aired)]</label>
+                <visible>!String.IsEmpty(Window().Property(item.info.season)) + !String.IsEmpty(Window().Property(item.info.aired))</visible>
+            </control>
+        </control>
+        <control type="textbox">
+            <left>110</left>
+            <top>458</top>
+            <width>820</width>
+            <height>160</height>
+            <font>Reg28</font>
+            <textcolor>$INFO[Skin.String(BingiePlotTextColor)]</textcolor>
+            <shadowcolor>80000000</shadowcolor>
+            <label>$INFO[Window().Property(item.info.plot)]</label>
+        </control>
+        <!-- Seren logo -->
+        <control type="image" id="1001">
+            <right>70</right>
+            <top>50</top>
+            <width>200</width>
+            <height>90</height>
+            <aspectratio align="right">keep</aspectratio>
+            <texture>$INFO[Window().Property(seren.logo)]</texture>
+            <colordiffuse>CCFFFFFF</colordiffuse>
+        </control>
+        <control type="group">
+            <left>110</left>
+            <top>720</top>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>56</width>
+                <height>56</height>
+                <texture>bingie_spinner.png</texture>
+                <colordiffuse>$INFO[Skin.String(SpinnerTextureColor)]</colordiffuse>
+                <animation effect="rotate" end="-360" center="auto" time="900" loop="true" reversible="false" condition="true">Conditional</animation>
+            </control>
+            <control type="label">
+                <left>80</left>
+                <width>1200</width>
+                <height>56</height>
+                <aligny>center</aligny>
+                <font>Bold32</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(notification_text)]</label>
+            </control>
+            <control type="textbox">
+                <top>80</top>
+                <width>1300</width>
+                <height>76</height>
+                <font>Reg28</font>
+                <textcolor>$INFO[Skin.String(GeneralTextColor)]</textcolor>
+                <label>$INFO[Window().Property(release_title)]</label>
+            </control>
+            <control type="grouplist">
+                <top>170</top>
+                <width>1300</width>
+                <height>40</height>
+                <orientation>horizontal</orientation>
+                <itemgap>40</itemgap>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Provider  [COLOR $INFO[Skin.String(GeneralTextColor)]][B][UPPERCASE]$INFO[Window().Property(debrid_provider)][/UPPERCASE][/B][/COLOR]</label>
+                    <visible>!String.IsEmpty(Window().Property(debrid_provider))</visible>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>Source  [COLOR $INFO[Skin.String(GeneralTextColor)]][B][UPPERCASE]$INFO[Window().Property(source_provider)][/UPPERCASE][/B][/COLOR]</label>
+                    <visible>!String.IsEmpty(Window().Property(source_provider))</visible>
+                </control>
+                <control type="label">
+                    <width>auto</width>
+                    <height>40</height>
+                    <font>Reg26</font>
+                    <textcolor>$INFO[Skin.String(BingieDeatailsTextColor)]</textcolor>
+                    <label>$ADDON[plugin.video.seren 30251]  [COLOR $INFO[Skin.String(GeneralTextColor)]][B]$INFO[Window().Property(source_size)][/B][/COLOR]</label>
+                    <visible>!String.IsEmpty(Window().Property(source_size))</visible>
+                </control>
+            </control>
+
+            <control type="grouplist">
+                <left>0</left>
+                <top>222</top>
+                <width>1300</width>
+                <height>48</height>
+                <orientation>horizontal</orientation>
+                <itemgap>6</itemgap>
+                <usecontrolcoords>false</usecontrolcoords>
+                <control type="image">
+                    <width>90</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/res/$INFO[Window().Property(source_resolution)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(source_resolution))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.hdrcodec_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.hdrcodec_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.hdrcodec_2)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.hdrcodec_2))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.videocodec_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.videocodec_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.videocodec_2)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.videocodec_2))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiocodec_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiocodec_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiocodec_2)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiocodec_2))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiocodec_3)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiocodec_3))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiochannels_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiochannels_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.misc_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.misc_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.misc_2)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.misc_2))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.misc_3)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.misc_3))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.multilang_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.multilang_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiolang_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiolang_1))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.audiolang_2)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.audiolang_2))</visible>
+                </control>
+                <control type="image">
+                    <width>129</width>
+                    <height>48</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>flags/info/$INFO[Window().Property(info.subtitlelang_1)].png</texture>
+                    <visible>!String.IsEmpty(Window().Property(info.subtitlelang_1))</visible>
+                </control>
+            </control>
+        </control>
+    </controls>
+</window>
